@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Loader from 'react-loaders'
 import AnimatedLetters from '../AnimatedLetters'
-import portfolioData from '../data/portfolio.json'
-
+import { getDocs, collection } from 'firebase/firestore';
+import { db } from '../../firebase';
 import './index.scss'
 
 const Portfolio = () => {
   const [letterClass, setletterClass] = useState('text-animate')
-  console.log(portfolioData)
+  const [portfolio, setPortfolio] = useState([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,6 +19,15 @@ const Portfolio = () => {
     }
   })
 
+  useEffect(() => {
+    getPortfolio();
+  }, []);
+
+const getPortfolio = async () => {
+  const querySnapshot = await getDocs(collection(db, 'portfolio'));
+  setPortfolio(querySnapshot.docs.map((doc) => doc.data()));
+}
+
   const renderPortfolio = (portfolio) => {
 
     return (
@@ -28,17 +37,15 @@ const Portfolio = () => {
                     return (
                         <div className='image-box' key={idx}>
                             <img 
-                                onMouseOver={event => event.target.play()}
-                                onMouseOut={event => event.target.pause()}
-                                src={port.cover}
+                                src={port.image}
                                 className='portfolio-video'
                                 alt='portfolio'
                             />
                             <div className='content'>
-                                <h2 className='title'>{port.title}</h2>
+                                <h2 className='title'>{port.name}</h2>
                                 <h3 className='description'>{port.description}</h3>
-                                <h3 className='stack'>{port.stack}</h3>
-                                <button className='btn' onClick={() => window.open(port.src)}>View Project</button>
+                                {/* <h3 className='stack'>{port.stack}</h3> */}
+                                {/* <button className='btn' onClick={() => window.open(port.src)}>View Project</button> */}
                                 <br></br>
                                 <button className='btn' onClick={() => window.open(port.url)}>Source Code</button>
                             </div>
@@ -61,7 +68,7 @@ const Portfolio = () => {
         />
       </h1> 
       <div>
-        {renderPortfolio(portfolioData.portfolio)}
+        {renderPortfolio(portfolio)}
       </div> 
     </div>
     <Loader type='pacman'/>
