@@ -14,9 +14,6 @@ const Home = () => {
         const description = form.current[1]?.value;
         const url = form.current[2]?.value;
         const image = form.current[3]?.files[0];
-        // const stack = form.current[4]?.value
-        // const src = form.current[5]?.value
-        console.log(name, description, url, image)
 
         const storageRef = ref(storage, `portfolio/${image.name}`);
 
@@ -27,9 +24,7 @@ const Home = () => {
                         name,
                         description,
                         url,
-                        image: downloadUrl,
-                        // stack,
-                        // src
+                        image: downloadUrl
                     })
                 }, (error) => {
                     console.log(error);
@@ -37,9 +32,7 @@ const Home = () => {
                         name,
                         description,
                         url,
-                        image: null,
-                        // stack,
-                        // src
+                        image: null
                     })
                 })
             }, (error) => {
@@ -48,21 +41,19 @@ const Home = () => {
                     name,
                     description,
                     url,
-                    image: null,
-                    // stack,
-                    // src
+                    image: null
                 })
             }
         )
     }
 
     const savePortfolio = async (portfolio) => {
-        try {
+        // try {
             await addDoc(collection(db, 'portfolio'), portfolio);
             window.location.reload(false);
-        } catch (error) {
-            alert('Failed to add portfolio');
-        }
+        // } catch (error) {
+        //     alert('Failed to add portfolio');
+        // }
     }
 
     return (
@@ -71,10 +62,8 @@ const Home = () => {
             <form ref={form} onSubmit={submitPortfolio}>
                 <p><input type="text" placeholder="Name" /></p>
                 <p><textarea placeholder="Description" /></p>
-                <p><input type="text" placeholder="Repo" /></p>
+                <p><input type="text" placeholder="Url" /></p>
                 <p><input type="file" placeholder="Image" /></p>
-                {/* <p><input type="text" placeholder="Stack" /></p>
-                <p><input type="text" placeholder="Source" /></p> */}
                 <button type="submit">Submit</button>
                 <button onClick={() => auth.signOut()}>Sign out</button>
             </form>
