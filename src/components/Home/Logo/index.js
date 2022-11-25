@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import LogoS from '../../../assets/images/t-logo.png'
+import LogoS from '../../../assets/images/canvas profile picture.jpg'
 import './index.scss'
 
 const Logo = () => {

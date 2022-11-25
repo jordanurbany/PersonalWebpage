@@ -1,6 +1,6 @@
 import './index.scss'
 import { Link, NavLink } from 'react-router-dom'
-import LogoS from '../../assets/images/teddy-logo.png'
+import LogoS from '../../assets/images/canvas profile picture.jpg'
 import LogoSubtitle from '../../assets/images/logo_sub.png'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

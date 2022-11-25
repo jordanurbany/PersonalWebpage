@@ -2,9 +2,9 @@ import {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import LogoT from '../../assets/images/teddy-logo2.png'
 import AnimatedLetters from '../AnimatedLetters'
-import Logo from './Logo'
 import './index.scss'
 import Loader from 'react-loaders'
+import hanalei from '../../assets/images/hanalei1.jpg'
 
 const Home = () => {
   const [letterClass, setletterClass] = useState('text-animate')
@@ -37,7 +37,7 @@ const Home = () => {
           <h2>full-stack developer | programmer | open source contributor | adrdent learner</h2>
           <Link to='/contact' className='flat-button'>CONTACT ME</Link>
         </div>
-        <Logo />
+        <img src={hanalei} alt='hanalei' className='logo-container' />
       </div>
       <Loader type='pacman' />
     </>
